@@ -1,0 +1,10 @@
+Organisation du code
+
+kickorflip	-> programme principal
+structures	-> définitions des structures de donnée du jeu
+affichage	-> affichage de la grille et de messages divers
+gestion_jeu -> procédures générales de gestion du jeu et des coups
+entrees_jeu		-> entrées ( saisies par l'utilisateur ) du jeu
+entrees_sorties	-> utilitaires d'E/S Ada
+
+Des scripts sont fournis pour nettoyer le dossier & compiler le code.
