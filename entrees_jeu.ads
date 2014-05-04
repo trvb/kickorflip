@@ -1,6 +1,7 @@
 with entrees_sorties; use entrees_sorties;
 
 with utilitaires; use utilitaires;
+with maths; use maths;
 with affichage; use affichage;
 with structures; use structures;
 

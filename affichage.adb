@@ -31,7 +31,10 @@ package body affichage is
         case mcase.mtype is
             when VIDE => return " ";
             when OCCUPE => if(mcase.mpion.camp = BLANC) then
-                               return "☺"; else return "☻"; end if;
+                               return "☻";
+                           else
+                               return "☺";
+                           end if;
         end case;
     end caractereCaseJeu;
     

@@ -2,6 +2,7 @@ with entrees_sorties; use entrees_sorties;
 with Ada.Exceptions; use Ada.Exceptions;
 
 with structures; use structures;
+with utilitaires; use utilitaires;
 
 package gestion_jeu is
 
