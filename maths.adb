@@ -59,7 +59,7 @@ begin
         vc := dc / abs(dc);
     elsif (abs(dl) = 1) and (abs(dc) = 1) then
         valide := true;
-        vl := 1; vc := 1;        
+        vl := dl; vc := dc;        
     else
         p := pgcd(abs(dc),abs(dl));
         dl := dl / p; dc := dc / p;        
