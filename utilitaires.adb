@@ -8,7 +8,8 @@ begin
     n := Integer'Value(s);
     return n;
 exception
-    -- il peut arriver que le caractère ne soit pas un chiffre, dans ce cas on ne fait pas planter le programme
+    -- il peut arriver que le caractère ne soit pas un chiffre, dans ce cas on
+    -- ne fait pas planter le programme
     when CONSTRAINT_ERROR =>
         n := -1;
         return n;

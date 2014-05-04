@@ -31,7 +31,8 @@ package body entrees_jeu is
                     if (cstr(i) in Lignes) and (convCharInt(cstr(i+1)) in Colonnes) then
                         cib.lig := cstr(i);
                         cib.col := convCharInt(cstr(i+1));
-                        -- si il s'agit de la première coordonnée, c'est celle du pion de départ
+                        -- si il s'agit de la première coordonnée, c'est celle
+                        -- du pion de départ
                         if(saisie1) then
                             c.mciblePion := cib;
                             saisie1 := false;
@@ -41,7 +42,8 @@ package body entrees_jeu is
                             c.mcibles(c.nombreCibles) := cib;
                         end if;
                         i := i + 2;
-                    -- si la ligne est invalide, on fait recommencer l'opération et on empêche les suivantes de se produire
+                    -- si la ligne est invalide, on fait recommencer l'opération
+                    -- et on empêche les suivantes de se produire
                     else
                         put("Format de la saisie invalide."); new_line;
                         err := true;
@@ -52,7 +54,8 @@ package body entrees_jeu is
             end loop;
             -- on vérifie qu'il n'y a pas qu'une cible qui a été saisie
             if(not err) and (c.nombreCibles = 0) then
-                put("Il faut également saisir les cibles sur la même ligne que le pion choisi."); new_line;
+                put("Il faut également saisir les cibles sur la même ligne que"
+                    & "le pion choisi."); new_line;
                 err := true;
             end if;
             -- si tout est correct on retourne

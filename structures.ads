@@ -17,7 +17,9 @@ subtype Lignes is Character range 'A'..'I';
 subtype Colonnes is Integer range 1..9;
 type Damier is array(Lignes,Colonnes) of CaseJeu;
 
-type TypeCoup is (KICK, FLIP, ERREUR_DEHORS, ERREUR_COUP_NUL, ERREUR_CASE_DEPART, ERREUR_AVANT_ELIM, ERREUR_AVANT_SAUT, ERREUR_CASE_SAUTEE, ERREUR_DEST_SAUT, ERREUR_DEJA_SAUTEE) ;
+type TypeCoup is (KICK, FLIP, ERREUR_DEHORS, ERREUR_COUP_NUL, ERREUR_CASE_DEPART,
+                  ERREUR_AVANT_ELIM, ERREUR_AVANT_SAUT, ERREUR_CASE_SAUTEE,
+                  ERREUR_DEST_SAUT, ERREUR_DEJA_SAUTEE) ;
 
 type Joueur is record
 	nom : String(1..10);

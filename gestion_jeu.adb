@@ -21,22 +21,29 @@ procedure verifierCoup(jeu : in Damier; j : in Joueur; c : in out Coup) is
 typeAnalyse : TypeCoup;
 begin
     -- le pion de départ est invalide
-    if (jeu(c.mciblePion.lig,c.mciblePion.col).mtype = VIDE) or (jeu(c.mciblePion.lig,c.mciblePion.col).mpion.camp /= j.camp) then
+    if (jeu(c.mciblePion.lig,c.mciblePion.col).mtype = VIDE)
+        or (jeu(c.mciblePion.lig,c.mciblePion.col).mpion.camp /= j.camp) then
         c.mtype := ERREUR_CASE_DEPART;
         return;
     end if;
     
     -- on vérifie le type du premier coup effectué
-    if (jeu(c.mcibles(1).lig,c.mcibles(1).col).mtype = VIDE) then -- c'est un flip
+    if (jeu(c.mcibles(1).lig,c.mcibles(1).col).mtype = VIDE) then
         typeAnalyse := FLIP;
-    else -- c'est un kick
+    else
         typeAnalyse := KICK;
     end if;
     
     -- vérifications KICK
+    if (typeAnalyse = KICK) then
+        null;
+    end if;
     
     -- vérifications FLIP
-    
+    if (typeAnalyse = FLIP) then
+        null;
+    end if;
+        
 end verifierCoup;
 
 end gestion_jeu;
