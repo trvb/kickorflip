@@ -4,10 +4,27 @@ package body entrees_jeu is
     begin
         -- TODO : Version 4,5 : support du joueur IA
         j1.camp := BLANC; j2.camp := NOIR;
-        put("Joueur 1 - BLANC - Nom : "); get_line(j1.nom,j1.longueurNom);
-        put("Joueur 2 - NOIR  - Nom : "); get_line(j2.nom,j2.longueurNom);
+        put("Joueur 1 - "); put(TypeJoueur'Image(j1.mtype));
+        put(" - BLANC - Nom : "); skip_line;
+        get_line(j1.nom,j1.longueurNom);
+        
+        put("Joueur 2 - "); put(TypeJoueur'Image(j2.mtype));
+        put(" - NOIR  - Nom : ");
+        get_line(j2.nom,j2.longueurNom);
     end saisirJoueurs;
     
+    function saisirModeJeu return ModeJeu is
+    c : Character;
+    choix : Integer := -1;
+    begin
+        afficherMenu;        
+        while (choix < 1) or (choix > 3) loop
+            put("Choix : "); get(c);
+            choix := convCharInt(c);
+        end loop;
+        return ModeJeu'val(choix-1);
+    end saisirModeJeu;
+        
     procedure saisirMouvements(coupRet : out Coup) is
     c : Coup; cib : Cible;
     lenMax : Integer := 100; -- valeur maximale arbitraire de la longueur de cstr
@@ -55,7 +72,7 @@ package body entrees_jeu is
             -- on vérifie qu'il n'y a pas qu'une cible qui a été saisie
             if(not err) and (c.nombreCibles = 0) then
                 put("Il faut également saisir les cibles sur la même ligne que"
-                    & "le pion choisi."); new_line;
+                    & " le pion choisi."); new_line;
                 err := true;
             end if;
             -- si tout est correct on retourne

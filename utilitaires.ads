@@ -10,5 +10,6 @@ package utilitaires is
     function directionValide(depart,dest : Cible) return Boolean;
     procedure trouverObstacles(depart, dest : in Cible; jeu : in Damier;
                                nb : out Integer; liste : out ListeCibles);
+    function campInv(camp : Couleur) return Couleur;
     
 end utilitaires;

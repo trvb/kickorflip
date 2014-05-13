@@ -13,6 +13,14 @@ begin
     else cf := Colonnes'succ(c.col); end if;
 end sousMatriceVoisins;
 
+function campInv(camp : Couleur) return Couleur is
+begin
+    case camp is
+        when NOIR => return BLANC;
+        when BLANC => return NOIR;
+    end case;
+end campInv;
+
 function casesVoisines(c1,c2 : Cible; jeu : Damier) return Boolean is
 ligDebut,ligFin : Lignes;
 colDebut,colFin : Colonnes;

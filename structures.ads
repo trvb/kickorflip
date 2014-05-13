@@ -21,8 +21,12 @@ type TypeCoup is (KICK, FLIP, ERREUR_DEHORS, ERREUR_COUP_NUL, ERREUR_CASE_DEPART
                   ERREUR_AVANT_ELIM, ERREUR_AVANT_SAUT, ERREUR_CASE_SAUTEE,
                   ERREUR_DEST_SAUT, ERREUR_DEJA_SAUTEE) ;
 
+type TypeJoueur is (HUMAIN, ORDINATEUR);
+type ModeJeu is (H_VS_H, H_VS_O, O_VS_O);
+
 type Joueur is record
 	nom : String(1..10);
+	mtype : TypeJoueur := HUMAIN;
 	longueurNom : Integer;
 	camp : Couleur;
 	tourJeu : Boolean := false;
