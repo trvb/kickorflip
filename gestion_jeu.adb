@@ -61,7 +61,7 @@ procedure verifierFLIPUnique(jeu : in out Damier; j : in Joueur;
 nbPions : Integer;
 listePions : ListeCibles;
 begin
-    put("veriFlip");
+    stat := FLIP;
     -- case destination vide
     if (jeu(dest.lig,dest.col).mtype = OCCUPE) then        
         stat := ERREUR_DEST_SAUT;
@@ -92,7 +92,7 @@ begin
     end if;
 end verifierFLIPUnique;
 
-cJeu : Damier := jeu;
+copieJeu : Damier := jeu;
 pionDep : Cible := c.mciblePion;
 pionRet : Cible;
 indC : Integer := 1;
@@ -104,23 +104,23 @@ begin
     while (not fin) and (indC <= c.nombreCibles) loop
         put(indC);
         -- on vérifie le flip traité
-        verifierFLIPUnique(cJeu, j, pionDep, c.mcibles(indC), statutFlip, pionRet);
+        verifierFLIPUnique(copieJeu, j, pionDep, c.mcibles(indC), statutFlip, pionRet);
         
         -- si il est valide on l'applique dans notre copie de la grille de jeu
         -- afin d'empêcher le saut du même pion plusieurs fois
         if (statutFlip = FLIP) then
             if(j.camp = BLANC) then
-                cJeu(pionRet.lig,pionRet.col).mpion.camp := NOIR;
+                copieJeu(pionRet.lig,pionRet.col).mpion.camp := NOIR;
             else
-                cJeu(pionRet.lig,pionRet.col).mpion.camp := BLANC;
+                copieJeu(pionRet.lig,pionRet.col).mpion.camp := BLANC;
             end if;
         -- sinon on arrête la vérification
         else
             fin := true;
             c.mtype := statutFlip;
-        end if;    
-        indC := indC + 1;
+        end if;
         pionDep := c.mcibles(indC);
+        indC := indC + 1;
     end loop;
 end verifierFLIP;
 
@@ -143,7 +143,10 @@ begin
         c.mtype := FLIP;
         verifierFLIP(jeu, j, c);
     end if;
-        
+    
+    if(c.mtype = FLIP) then
+        put("lol");
+    end if;
     put(TypeCoup'Image(c.mtype)); new_line;
 end verifierCoup;
 
