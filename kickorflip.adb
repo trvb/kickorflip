@@ -10,27 +10,41 @@ with maths; use maths;
 procedure kickorflip is
 
 mgrille : Damier;
-j1,j2 : Joueur;
+j1,j2,jCourant : Joueur;
+tourJeu : Integer := 0;
+j1Gagne,j2Gagne : Boolean := false;
 c : Coup;
 coupValide : Boolean;
-mode : ModeJeu;
-begin  
+begin
+    -- Initialisation du jeu
     initialiserDamier(mgrille);
-
-    mode := saisirModeJeu;
-    
+    j2.mtype := saisirModeJeu;    
     saisirJoueurs(j1,j2);
-    
     afficherDamier(mgrille);
-    while true loop
-        saisirMouvements(c);        
-        verifierCoup(mgrille,j1,c,coupValide);
+    jCourant := j1;
+    
+    -- Boucle de jeu principale
+    while not(j1Gagne) or not(j2Gagne) loop
+        afficherTourJeu(jCourant);
+        recupererMouvements(jCourant,mgrille,c);
+        verifierCoup(mgrille,jCourant,c,coupValide);
         while (not coupValide) loop
-            saisirMouvements(c);
-            verifierCoup(mgrille,j1,c,coupValide);
+            recupererMouvements(jCourant,mgrille,c);
+            verifierCoup(mgrille,jCourant,c,coupValide);
         end loop;
-        executerCoup(mgrille,j1,c);
+        executerCoup(mgrille,jCourant,c);
         afficherDamier(mgrille);
+        partieTermine(mgrille,j1Gagne,j2Gagne);
+        
+        tourJeu := tourJeu + 1;
+        if(tourJeu mod 2 = 0) then
+            jCourant := j1;
+        else
+            jCourant := j2;
+        end if;
     end loop;
-
+    
+    -- Sortie du jeu
+    afficherResultat(mgrille,j1,j2);
+    
 end kickorflip;

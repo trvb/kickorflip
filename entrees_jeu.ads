@@ -9,6 +9,6 @@ package entrees_jeu is
 
     procedure saisirJoueurs(j1,j2 : out Joueur);
     procedure saisirMouvements(coupRet : out Coup);
-    function saisirModeJeu return ModeJeu;
+    function saisirModeJeu return TypeJoueur;
     
 end entrees_jeu;

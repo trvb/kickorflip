@@ -10,7 +10,6 @@ package body affichage is
         new_line;
         put(" (1) JOUEUR vs JOUEUR"); new_line;
         put(" (2) JOUEUR vs  ORDI"); new_line;
-        put(" (3)  ORDI  vs  ORDI"); new_line;
         new_line;
     end afficherMenu;
     
@@ -73,6 +72,13 @@ package body affichage is
         afficherBordureHorizontale(BAS);
         new_line;
     end afficherDamier;
+    
+    procedure afficherTourJeu(j : in Joueur) is
+    begin
+        put("Tour de '" & j.nom(1..j.longueurNom)
+            & "' ( " & Couleur'Image(j.camp) & " )");
+        new_line;
+    end afficherTourJeu;
     
     procedure afficherResultat(jeu : in Damier; j1,j2 : in Joueur) is
     begin

@@ -23,6 +23,14 @@ begin
     jeu('H',5).mpion.camp := BLANC;
 end initialiserDamier;
 
+procedure recupererMouvements(j : in Joueur; jeu : in out Damier; c : out Coup) is
+begin
+    case j.mtype is
+        when HUMAIN => saisirMouvements(c);    
+        when ORDINATEUR => null;
+    end case;
+end recupererMouvements;
+
 procedure verifierKICK(jeu : in Damier; j : in Joueur; c : in out Coup) is
 pion : Cible := c.mciblePion;
 dest : Cible := c.mcibles(1);
@@ -174,5 +182,22 @@ begin
     when others => raise COUP_NON_EXECUTABLE;
     end case;
 end executerCoup;
+
+procedure partieTermine(jeu : in Damier; j1Gagnant, j2Gagnant : out Boolean) is
+cptBlanc,cptNoir : Integer := 0;
+begin
+    for lig in Lignes'range loop
+        for col in Colonnes'range loop
+            if (jeu(lig,col).mtype = OCCUPE) then
+                case jeu(lig,col).mpion.camp is
+                    when BLANC => cptNoir := cptNoir + 1;
+                    when NOIR => cptBlanc := cptBlanc + 1;
+                end case;
+            end if;
+        end loop;
+    end loop;
+    j1Gagnant := cptNoir <= 6;
+    j2Gagnant := cptBlanc <= 6;
+end partieTermine;
 
 end gestion_jeu;

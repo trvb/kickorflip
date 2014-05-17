@@ -22,7 +22,6 @@ type TypeCoup is (KICK, FLIP, ERREUR_DEHORS, ERREUR_COUP_NUL, ERREUR_CASE_DEPART
                   ERREUR_DEST_SAUT, ERREUR_DEJA_SAUTEE) ;
 
 type TypeJoueur is (HUMAIN, ORDINATEUR);
-type ModeJeu is (H_VS_H, H_VS_O, O_VS_O);
 
 type Joueur is record
 	nom : String(1..10);

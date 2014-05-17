@@ -13,16 +13,16 @@ package body entrees_jeu is
         get_line(j2.nom,j2.longueurNom);
     end saisirJoueurs;
     
-    function saisirModeJeu return ModeJeu is
+    function saisirModeJeu return TypeJoueur is
     c : Character;
     choix : Integer := -1;
     begin
         afficherMenu;        
-        while (choix < 1) or (choix > 3) loop
+        while (choix < 1) or (choix > 2) loop
             put("Choix : "); get(c);
             choix := convCharInt(c);
         end loop;
-        return ModeJeu'val(choix-1);
+        return TypeJoueur'val(choix-1);
     end saisirModeJeu;
         
     procedure saisirMouvements(coupRet : out Coup) is
