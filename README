@@ -1,10 +1,14 @@
-Organisation du code
+Copyright (C) 2014 Théo Bueno
 
-kickorflip	-> programme principal
-structures	-> définitions des structures de donnée du jeu
-affichage	-> affichage de la grille et de messages divers
-gestion_jeu -> procédures générales de gestion du jeu et des coups
-entrees_jeu		-> entrées ( saisies par l'utilisateur ) du jeu
-entrees_sorties	-> utilitaires d'E/S Ada
+Kick-Or-Flip is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Des scripts sont fournis pour nettoyer le dossier & compiler le code.
+Kick-Or-Flip is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Kick-Or-Flip. If not, see <http://www.gnu.org/licenses/>.

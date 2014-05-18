@@ -1,8 +1,9 @@
+-- Procédures d'entrées de données par l'utilisateur
 package body entrees_jeu is
 
+    -- Rôle : saisie des noms des joueurs
     procedure saisirJoueurs(j1,j2 : out Joueur) is    
     begin
-        -- TODO : Version 4,5 : support du joueur IA
         j1.camp := BLANC; j2.camp := NOIR;
         put("Joueur 1 - "); put(TypeJoueur'Image(j1.mtype));
         put(" - BLANC - Nom : "); skip_line;
@@ -13,6 +14,7 @@ package body entrees_jeu is
         get_line(j2.nom,j2.longueurNom);
     end saisirJoueurs;
     
+    -- Rôle : saisie du mode de jeu
     function saisirModeJeu return TypeJoueur is
     c : Character;
     choix : Integer := -1;
@@ -24,7 +26,8 @@ package body entrees_jeu is
         end loop;
         return TypeJoueur'val(choix-1);
     end saisirModeJeu;
-        
+    
+    -- Rôle : saisie des mouvements ( liste de coups )
     procedure saisirMouvements(coupRet : out Coup) is
     c : Coup; cib : Cible;
     lenMax : Integer := 100; -- valeur maximale arbitraire de la longueur de cstr

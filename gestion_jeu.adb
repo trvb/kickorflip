@@ -1,5 +1,7 @@
+-- Procédures de gestion de la grille de jeu
 package body gestion_jeu is
 
+-- Rôle : initialisation de la grille de jeu
 procedure initialiserDamier(jeu : out Damier) is
 begin
     for i in Colonnes'Range loop
@@ -15,22 +17,9 @@ begin
             end loop;
         end if;
     end loop;
-    jeu('D',5).mtype := OCCUPE;
-    jeu('D',5).mpion.camp := NOIR;
-    jeu('F',5).mtype := OCCUPE;
-    jeu('F',5).mpion.camp := NOIR;
-    jeu('H',5).mtype := OCCUPE;
-    jeu('H',5).mpion.camp := BLANC;
 end initialiserDamier;
 
-procedure recupererMouvements(j : in Joueur; jeu : in out Damier; c : out Coup) is
-begin
-    case j.mtype is
-        when HUMAIN => saisirMouvements(c);    
-        when ORDINATEUR => null;
-    end case;
-end recupererMouvements;
-
+-- Rôle : vérification d'un coup de type KICK
 procedure verifierKICK(jeu : in Damier; j : in Joueur; c : in out Coup) is
 pion : Cible := c.mciblePion;
 dest : Cible := c.mcibles(1);
@@ -62,6 +51,7 @@ begin
     end if;
 end verifierKICK;
 
+-- Rôle : vérification d'un coup de type FLIP unique
 procedure verifierFLIPUnique(jeu : in out Damier; j : in Joueur;
                              depart, dest : in Cible; stat : out TypeCoup;
                              pion : out Cible) is
@@ -103,6 +93,7 @@ begin
     end if;
 end verifierFLIPUnique;
 
+-- Rôle : vérification d'un coup de type KICK ( qui peut être multiple )
 procedure verifierFLIP(jeu : in Damier; j : in Joueur; c : in out Coup) is
 copieJeu : Damier := jeu;
 pionDep : Cible := c.mciblePion;
@@ -129,6 +120,7 @@ begin
     end loop;
 end verifierFLIP;
 
+-- Rôle : vérification d'un coup de n'importe quel type
 procedure verifierCoup(jeu : in Damier; j : in Joueur; c : in out Coup; v : out Boolean) is
 pion : Cible := c.mciblePion;
 begin
@@ -152,6 +144,7 @@ begin
     v := (c.mtype = FLIP) or (c.mtype = KICK); -- validité du coup
 end verifierCoup;
 
+-- Rôle : exécution d'un coup dans la grille de jeu
 procedure executerCoup(jeu : in out Damier; j : in Joueur; c : in Coup) is
 nbP : Integer;
 listeP : ListeCibles;
@@ -180,9 +173,11 @@ begin
             pionDest := c.mcibles(i+1);
         end loop;
     when others => raise COUP_NON_EXECUTABLE;
+    -- cela ne devrait en principe jamais arriver
     end case;
 end executerCoup;
 
+-- Rôle : détecte si une partie est terminée et retourne les éventuels gagnants
 procedure partieTermine(jeu : in Damier; j1Gagnant, j2Gagnant : out Boolean) is
 cptBlanc,cptNoir : Integer := 0;
 begin
@@ -196,8 +191,8 @@ begin
             end if;
         end loop;
     end loop;
-    j1Gagnant := cptNoir <= 6;
-    j2Gagnant := cptBlanc <= 6;
+    j1Gagnant := (cptNoir <= 6);
+    j2Gagnant := (cptBlanc <= 6);
 end partieTermine;
 
 end gestion_jeu;

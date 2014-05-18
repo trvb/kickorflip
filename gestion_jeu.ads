@@ -15,8 +15,6 @@ package gestion_jeu is
     procedure executerCoup(jeu : in out Damier; j : in Joueur; c : in Coup);
     procedure partieTermine(jeu : in Damier; j1Gagnant, j2Gagnant : out Boolean);
     
-    procedure recupererMouvements(j : in Joueur; jeu : in out Damier; c : out Coup);
-    
     COUP_NON_EXECUTABLE : exception;
     
 end gestion_jeu;

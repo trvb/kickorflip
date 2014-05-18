@@ -1,5 +1,21 @@
+-- Procédures utilitaires liées à des calculs mathématiques
 package body maths is
 
+-- Rôle : retourne un entier généré aléatoirement compris entre 1 et max
+function entierAlea(max : Integer) return Integer is
+gen : Generator ;
+val : Float;
+ent : Integer := -1;
+begin
+    while (ent <= 0) or (ent > max) loop
+        reset(gen);
+        val := random(gen);
+        ent := (Integer(val*Float(max)));
+    end loop;
+    return ent;
+end entierAlea;
+
+-- Rôle : converti proprement ( sans erreur ) un caractère en entier
 function convCharInt(c : Character) return Integer is
 s : String(1..1);
 n : Integer;
@@ -15,6 +31,7 @@ exception
         return n;
 end convCharInt;
 
+-- Rôle : calcul par le théorème de Bezout
 procedure bezout(a,b : in Integer; pgcd,cs,ct : out Integer) is
 x,y,s,t,u,v,w,q,r : Integer;
 begin
@@ -32,6 +49,7 @@ begin
   ct := t;
 end bezout;
 
+-- Rôle : calcul d'un pgcd
 function pgcd(x,y : Integer) return Integer is
 tmp,f,g : Integer;
 begin
@@ -39,6 +57,7 @@ begin
   return tmp;
 end pgcd; 
 
+-- Rôle : calcule un vecteur direction et indique si il est valide dans le jeu
 procedure vecteurDirection(depart,dest : in Cible; valide : out Boolean;
                            vl,vc : out Integer) is
 p,dl,dc : Integer;

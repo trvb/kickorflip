@@ -21,7 +21,7 @@ package affichage is
     procedure afficherMenu;
     procedure afficherDamier(jeu : in Damier);
     procedure afficherTourJeu(j : in Joueur);
-    procedure afficherResultat(jeu : in Damier; j1,j2 : in Joueur);
+    procedure afficherResultat(jeu : in Damier; j1,j2 : in Joueur; j1g,j2g : in Boolean);
             
     procedure afficherMouvements(c : in Coup);
     

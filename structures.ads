@@ -1,3 +1,4 @@
+-- Structures de données utilisées dans le programme
 package structures is
 
 type Couleur is (BLANC,NOIR);
@@ -5,7 +6,6 @@ type TypeCase is (VIDE,OCCUPE);
 
 type Pion is record    
     camp : Couleur;    
-    -- on pourra enregistrer des statistiques dans cette structure ( scores et IA )
 end record;
 
 type CaseJeu is record
@@ -29,8 +29,6 @@ type Joueur is record
 	longueurNom : Integer;
 	camp : Couleur;
 	tourJeu : Boolean := false;
-	-- version 4&5 : type de joueur
-	-- on pourra comptabiliser des scores dans cette structure
 end record;
 
 type Cible is record
@@ -46,7 +44,6 @@ type Coup is record
 	mciblePion : Cible; -- le pion qui exécute le coup
 	mcibles : ListeCibles; -- les coordonnées des cases visées par le pion
 	nombreCibles : Integer := 0;
-	-- on pourra comptabiliser des statistiques dans cette structure ( IA )
 end record;
 
 end structures;

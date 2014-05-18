@@ -1,5 +1,7 @@
+-- Procédures utilitaires du jeu
 package body utilitaires is
 
+-- Rôle : retourne la sous-matrice de voisins valides d'une case
 procedure sousMatriceVoisins(c : in Cible; jeu : in Damier; ld,lf : out Lignes;
     cd,cf : out Colonnes) is
 begin
@@ -13,6 +15,7 @@ begin
     else cf := Colonnes'succ(c.col); end if;
 end sousMatriceVoisins;
 
+-- Rôle : retourne le camp adverse à un camp donné
 function campInv(camp : Couleur) return Couleur is
 begin
     case camp is
@@ -21,6 +24,7 @@ begin
     end case;
 end campInv;
 
+-- Rôle : indique si deux cases sont voisines ou non
 function casesVoisines(c1,c2 : Cible; jeu : Damier) return Boolean is
 ligDebut,ligFin : Lignes;
 colDebut,colFin : Colonnes;
@@ -39,6 +43,13 @@ begin
     return voisin;
 end casesVoisines;
 
+-- Rôle : indique si deux coordonnées sont valides dans la grille de jeu
+function cibleValide(lig,col : Integer) return Boolean is
+begin   
+    return (lig <= 9 and lig >= 1 and col <= 9 and col >= 1);
+end cibleValide;
+
+-- Rôle : indique si le mouvement entre deux cases est possible
 function directionValide(depart,dest : Cible) return Boolean is
 v : Boolean; a,b : Integer;
 begin
@@ -46,6 +57,7 @@ begin
     return v;
 end directionValide;
 
+-- Rôle : indique si la trajectoire entre deux cases est bien vide
 function trajectoireLibre(depart,dest : Cible; jeu : Damier) return Boolean is
 c : Colonnes := depart.col;
 l : Lignes := depart.lig;
@@ -69,6 +81,7 @@ begin
     return (not fin);
 end trajectoireLibre;
 
+-- Rôle : retourne une liste d'obstacles entre deux cases
 procedure trouverObstacles(depart, dest : in Cible; jeu : in Damier;
                            nb : out Integer; liste : out ListeCibles) is                          
 c : Colonnes := depart.col;

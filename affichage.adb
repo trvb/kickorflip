@@ -1,6 +1,7 @@
+-- Procédures d'affichage de la grille et des messages utilisateur
 package body affichage is
 
-    -- Affichage du menu
+    -- Rôle : affichage du menu
     procedure afficherMenu is
     begin
         new_line;
@@ -13,11 +14,10 @@ package body affichage is
         new_line;
     end afficherMenu;
     
-    -- Affichage de la grille de jeu
+    -- Rôle : affichage de la grille de jeu
     procedure afficherBordureHorizontale(pos : in PositionGrille) is
     begin
         case pos is
-            -- TODO : remplacer les valeurs hardcodées par des valeurs calculées
             when HAUT => put("  "); for i in Colonnes'range loop
                                         put("  "); put(i,0); put(" ");
                                     end loop; new_line;
@@ -31,12 +31,14 @@ package body affichage is
         end case; new_line;
     end afficherBordureHorizontale;
  
+    -- Rôle : affichage d'une ligne horizontale de la grille de jeu
     procedure afficherLigneHorizontale is
     begin
         put("  ║"); for i in 1..Colonnes'last-1 loop put("───┼"); end loop;
         put("───║"); new_line;  
     end afficherLigneHorizontale;
     
+    -- Rôle : retourne le caractère correspondant au pion d'un camp
     function caractereCaseJeu(lig : Lignes; col : Colonnes; jeu : Damier) return
         String is
     mcase : CaseJeu := jeu(lig,col);
@@ -51,6 +53,7 @@ package body affichage is
         end case;
     end caractereCaseJeu;
     
+    -- Rôle : affiche une ligne de la grille de jeu
     procedure afficherLigneDamier(jeu : in Damier; lig : Lignes) is
     begin
         put(lig); put(" ║");
@@ -61,18 +64,20 @@ package body affichage is
         put("║"); new_line;
     end afficherLigneDamier;
     
+    -- Rôle : affichage complet de la grille de jeu
     procedure afficherDamier(jeu : in Damier) is
     begin
-        new_line;
+        new_line; new_line;
         afficherBordureHorizontale(HAUT);
         for c in Lignes'range loop
             afficherLigneDamier(jeu,c);
             if(c /= Lignes'last) then afficherLigneHorizontale; end if; 
         end loop;
         afficherBordureHorizontale(BAS);
-        new_line;
+        new_line; new_line;
     end afficherDamier;
     
+    -- Rôle : affichage du tour de jeu d'un joueur donné
     procedure afficherTourJeu(j : in Joueur) is
     begin
         put("Tour de '" & j.nom(1..j.longueurNom)
@@ -80,17 +85,27 @@ package body affichage is
         new_line;
     end afficherTourJeu;
     
-    procedure afficherResultat(jeu : in Damier; j1,j2 : in Joueur) is
+    -- Rôle : affiche le résultat final d'une partie
+    procedure afficherResultat(jeu : in Damier; j1,j2 : in Joueur; j1g,j2g : in Boolean) is
+    jG : Joueur;
     begin
-        null;
+        if(j1g) then
+            jG := j1;
+        elsif(j2g) then
+            jG := j2;
+        end if;        
+        put("Partie terminée, '" & jG.nom(1..jG.longueurNom)
+            & "' ( " & Couleur'Image(jG.camp) & " ) a gagné !");
+        new_line;
     end afficherResultat;
     
-    -- Affichages de structures du jeu
+    -- Rôle : affichage des coordonnées d'une cible
     procedure afficherCible(c : in Cible) is
     begin
         put(c.lig); put(c.col,0); put(' ');
     end afficherCible;
     
+    -- Rôle : affichage d'un coup complet ( liste de cibles )
     procedure afficherMouvements(c : in Coup) is
     begin
         put("Coup : ");
@@ -100,7 +115,7 @@ package body affichage is
         end loop;
     end afficherMouvements;
     
-    -- Aide et messages divers
+   -- Rôle : affichage de l'aide à la saisie de coups
    procedure afficherAideSaisieCoups is
     begin
         new_line;
@@ -121,6 +136,7 @@ package body affichage is
         new_line; new_line;
     end afficherAideSaisieCoups;
     
+    -- Rôle : affichage des messages d'erreur d'entrée de mouvements
     procedure afficherMessageErreurMouv(msg : in MessageErreurMouv; dep,dest : Cible) is
     begin
         case msg is
